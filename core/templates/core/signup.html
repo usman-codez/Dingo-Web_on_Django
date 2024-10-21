@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+            padding: 20px;
+            height: 100vh; /* Full height */
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            margin: 0; /* Remove default margin */
+        }
+        .container {
+            max-width: 400px;
+            width: 100%; /* Responsive width */
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(240, 240, 240, 0.8)); /* Light gradient for form */
+            padding: 20px;
+            border-radius: 10px; /* More rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px); /* Blur effect for background */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333; /* Darker text color */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555; /* Slightly lighter text color */
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Signup</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            <span class="error">{{ field.error|striptags }}</span>
+        </div>
+        {% endfor %}
+        <input type="submit" value="Sign Up">
+
+    </form>
+
+    {% if messages %}
+    {% for message in messages %}
+     <div class="alert alert-success">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+</div>
+</body>
+</html>
